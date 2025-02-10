@@ -6,14 +6,16 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        this.body.setVelocityY(200)
+        this.body.setVelocityY(250)
     }
 
     reset() {
-        let spawnPoint = [230, 340, 456, 565]
-        let spawnLane = Phaser.Math.Between(0, 3)
+        let spawnPoint = [230, 340]
+        let spawnLane = Phaser.Math.Between(0, 1)
 
         this.x = spawnPoint[spawnLane]
-        this.y = -50
+        this.y = -150
     }
 }
+
+//right spawns = 456 and 565
