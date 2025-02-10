@@ -6,6 +6,7 @@ class Menu extends Phaser.Scene {
     preload() {
         this.load.image('highway', './assets/highway.png')
         this.load.image('player', './assets/player-car.png')
+        this.load.image('enemy', './assets/enemy-car.png')
     }
 
     create() {
