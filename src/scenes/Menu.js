@@ -7,11 +7,12 @@ class Menu extends Phaser.Scene {
         this.load.image('highway', './assets/highway.png')
         this.load.image('player', './assets/player-car.png')
         this.load.image('enemy', './assets/enemy-car.png')
+        this.load.image('enemy-blue', './assets/blue-enemy-car.png')
         this.load.image('jay-walker', './assets/jay-walker.png')
     }
 
     create() {
-        this.highway = this.add.tileSprite(0, 0, 800, 600, 'highway').setOrigin(0, 0)
+        this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
         let menuConfig = {
             fontFamily: 'Courier',
