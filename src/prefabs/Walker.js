@@ -5,21 +5,21 @@ class Walker extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this)
         this.points = pointValue
 
-        /*this.direction = new Phaser.Math.Vector2(1, 1)
+        this.direction = new Phaser.Math.Vector2(1, 1)
         //handle initial velocity
-        if (this.body.x > 400) {
+        /*if (this.body.x > 400) {
             this.body.setVelocityX(50 * this.direction.x)
         } else if (this.body.x < 400) {
             this.body.setVelocityX(-50 * this.direction.x)
         }*/
     }
 
-    update() {
-        this.body.setVelocityY(150)
+    update(speed) {
+        this.body.setVelocityY(150 * speed)
     }
 
     reset() {
-        let spawnSide = [106, 490]
+        let spawnSide = [156, 390]
         let spawnPicker = Phaser.Math.Between(0, 1)
 
         this.body.x = spawnSide[spawnPicker]

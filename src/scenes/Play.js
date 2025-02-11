@@ -5,47 +5,71 @@ class Play extends Phaser.Scene {
     
     create() {
         //game over flag
-        let gameOver = false
+        this.gameOver = false
+
+        //game speed
+        this.gameSpeed = 1
+
+        //set world bounds
+        this.physics.world.setBounds(120, 0, 380, 800)
         
         this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
         //add player character
-        this.playerCar = new Player(this, 342, 700, 'player').setScale(0.04).setRotation(Phaser.Math.DegToRad(180))
+        this.playerCar = new Player(this, 342, 700, 'player').setScale(0.05).setRotation(Phaser.Math.DegToRad(180))
 
         //add enemy cars
-        this.enemyCar01 = new Enemy(this, 260, -50, 'enemy', 'left').setScale(0.1).setOrigin(0.5, 0)
-        this.enemyCar02 = new Enemy(this, 345, -50, 'enemy-blue', 'right').setScale(0.15).setOrigin(0.5, 0)
+        this.enemyCar01 = new Enemy(this, 225, -50, 'enemy', 'left').setScale(0.125).setOrigin(0.5, 0)
+        this.enemyCar02 = new Enemy(this, 342, -50, 'enemy-blue', 'right').setScale(0.17).setOrigin(0.5, 0)
 
         //add jay walker
-        this.walker01 = new Walker(this, 490, -50, 'jay-walker', 10).setScale(0.015).setOrigin(0, 0.5)
+        this.walker01 = new Walker(this, 390, -50, 'jay-walker', 10).setScale(0.017).setOrigin(0, 0.5)
 
         //player input
         this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+        this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
+        this.downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN)
 
         //player-enemy collision
-        this.physics.add.collider(this.playerCar, this.enemyCar01, () => {
-            this.scene.start('menuScene')
+        this.physics.add.collider(this.playerCar, this.enemyCar01, (player, enemy) => {
+            this.add.sprite(player.x - 20, player.y - 20, 'explosion').setScale(0.3)
+            this.gameOver = true
+            //player.destroy()
+            //enemy.destroy()
+            //this.scene.start('menuScene')
         })
         this.physics.add.collider(this.playerCar, this.enemyCar02, () => {
             this.scene.start('menuScene')
         })
-
         //player-walker collision
         this.physics.add.collider(this.playerCar, this.walker01, () => {
             this.walker01.reset()
         })
+        //timer for speed
+        this.timer = this.time.addEvent({
+            delay: 5000,
+            callback: () => {
+                this.gameSpeed += 0.1
+            },
+            loop: true
+        })
     }
-    
-    //640 155
 
     update() {
-        this.highway.tilePositionY -= 2.5
-
         //update all movements
-        this.playerCar.update()
-        this.enemyCar01.update()
-        this.walker01.update()
+        if(!this.gameOver) {
+            this.playerCar.update()
+            this.walker01.update(this.gameSpeed)
+            this.enemyCar01.update(this.gameSpeed)
+            this.enemyCar02.update(this.gameSpeed)
+            this.highwayScroll()
+        }
+        if(this.gameOver) {
+            this.walker01.body.setVelocityY(0)
+            this.enemyCar01.body.setVelocityY(0)
+            this.enemyCar02.body.setVelocityY(0)
+        }
         //console.log(`${this.playerCar.x}`)
 
         //handle enemy respawn
@@ -54,10 +78,13 @@ class Play extends Phaser.Scene {
         } else if (this.enemyCar02.y > 800) {
             this.enemyCar02.reset() 
         }
-
-        //jay walker goes off map
+        //walker respawn
         if (this.walker01.y > 800) {
             this.walker01.reset()
         }
+    }
+
+    highwayScroll() {
+        this.highway.tilePositionY -= 2.5 * this.gameSpeed
     }
 }

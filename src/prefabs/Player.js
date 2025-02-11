@@ -1,9 +1,10 @@
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture)
-
         scene.add.existing(this)
         scene.physics.add.existing(this)
+
+        //set bounds for player
         this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
     }
@@ -11,6 +12,7 @@ class Player extends Phaser.GameObjects.Sprite {
     update() {
         //handle player movement
         this.body.setVelocityX(0)
+        this.body.setVelocityY(0)
         this.angle = 180
         if(this.scene.leftKey.isDown) {
             //console.log('left working')
@@ -20,6 +22,10 @@ class Player extends Phaser.GameObjects.Sprite {
             //console.log('right working')
             this.body.setVelocityX(200)
             this.angle = 200
+        } else if (this.scene.upKey.isDown) {
+            this.body.setVelocityY(-200)
+        } else if (this.scene.downKey.isDown) {
+            this.body.setVelocityY(200)
         }
     }
 }

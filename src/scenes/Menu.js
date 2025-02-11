@@ -4,11 +4,12 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('highway', './assets/highway.png')
+        this.load.image('highway', './assets/highway2.png')
         this.load.image('player', './assets/player-car.png')
         this.load.image('enemy', './assets/enemy-car.png')
         this.load.image('enemy-blue', './assets/blue-enemy-car.png')
         this.load.image('jay-walker', './assets/jay-walker.png')
+        this.load.image('explosion', './assets/explosion.png')
     }
 
     create() {
