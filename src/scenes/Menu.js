@@ -4,12 +4,14 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('highway', './assets/highway2.png')
-        this.load.image('player', './assets/player-car.png')
-        this.load.image('enemy', './assets/enemy-car.png')
-        this.load.image('enemy-blue', './assets/blue-enemy-car.png')
+        this.load.image('highway', './assets/highway3.png')
+        this.load.image('player', './assets/red-car.png')
+        this.load.image('enemy', './assets/blue-car.png')
+        this.load.image('enemy-blue', './assets/white-car.png')
         this.load.image('jay-walker', './assets/jay-walker.png')
         this.load.image('explosion', './assets/explosion.png')
+        this.load.image('restart-button', './assets/restart-button.png')
+        this.load.image('menu-button', './assets/menu-button.png')
     }
 
     create() {
@@ -19,7 +21,7 @@ class Menu extends Phaser.Scene {
             fontFamily: 'Courier',
             fontSize: '80px',
             color: '#FFFFFF',
-            align: 'right',
+            align: 'center',
             padding: {
                 top: 5,
                 bottom: 5,
@@ -27,7 +29,7 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         //display menu text
-        this.add.text(game.config.width/2, 400, 'Intrusive Thoughts', {})
+        this.add.text(300, 400, 'Intrusive Thoughts', menuConfig)
 
         //add inputs
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)

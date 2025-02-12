@@ -13,7 +13,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //reset velocities and angles when not moving
         this.body.setVelocityX(0)
         this.body.setVelocityY(0)
-        this.angle = 180
+        this.angle = 0
 
         //handle player movement
         let playerVector = new Phaser.Math.Vector2(0, 0)
@@ -21,11 +21,11 @@ class Player extends Phaser.GameObjects.Sprite {
         if(this.scene.leftKey.isDown) {
             //console.log('left working')
             playerVector.x = -1
-            this.angle = 160
+            this.angle = -20
         } else if (this.scene.rightKey.isDown) {
             //console.log('right working')
             playerVector.x = 1
-            this.angle = 200
+            this.angle = 20
         }
         if (this.scene.upKey.isDown) {
             playerVector.y = -1
