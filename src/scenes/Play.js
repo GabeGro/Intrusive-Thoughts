@@ -11,12 +11,12 @@ class Play extends Phaser.Scene {
         this.gameSpeed = 1
 
         //set world bounds
-        this.physics.world.setBounds(120, 0, 380, 800)
+        this.physics.world.setBounds(150, 0, 260, 800)
         
         this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
         //add player character
-        this.playerCar = new Player(this, 342, 700, 'player').setScale(0.05).setRotation(Phaser.Math.DegToRad(180))
+        this.playerCar = new Player(this, 342, 700, 'player').setScale(0.045).setRotation(Phaser.Math.DegToRad(180))
 
         //add enemy cars
         this.enemyCar01 = new Enemy(this, 225, -50, 'enemy', 'left').setScale(0.125).setOrigin(0.5, 0)
@@ -45,6 +45,7 @@ class Play extends Phaser.Scene {
         //player-walker collision
         this.physics.add.collider(this.playerCar, this.walker01, () => {
             this.walker01.reset()
+            this.score += this.walker01.points
         })
         //timer for speed
         this.timer = this.time.addEvent({
@@ -53,6 +54,18 @@ class Play extends Phaser.Scene {
                 this.gameSpeed += 0.1
             },
             loop: true
+        })
+        //scoreboard
+        this.score = 0
+
+        this.scoreBG = this.add.graphics()
+        this.scoreBG.fillStyle(0x000000, 0.5)
+        this.scoreBG.fillRect(50, 50, 200, 50)
+
+        this.scoreboard = this.add.text(50, 50, 'Score: ' + this.score, {
+            fontSize: '20px',
+            color: '#FFFFFF',
+            fontFamily: 'Courier'
         })
     }
 
@@ -70,8 +83,8 @@ class Play extends Phaser.Scene {
             this.enemyCar01.body.setVelocityY(0)
             this.enemyCar02.body.setVelocityY(0)
         }
-        //console.log(`${this.playerCar.x}`)
-
+        //update scoreboards
+        this.scoreboard.setText('Score: ' + this.score)
         //handle enemy respawn
         if (this.enemyCar01.y > 800) {
             this.enemyCar01.reset() 
@@ -82,6 +95,7 @@ class Play extends Phaser.Scene {
         if (this.walker01.y > 800) {
             this.walker01.reset()
         }
+        //console.log(`${this.playerCar.x}`)
     }
 
     highwayScroll() {
