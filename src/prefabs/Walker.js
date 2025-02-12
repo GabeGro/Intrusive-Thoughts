@@ -19,7 +19,7 @@ class Walker extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
-        let spawnSide = [156, 390]
+        let spawnSide = [156, 410]
         let spawnPicker = Phaser.Math.Between(0, 1)
 
         this.body.x = spawnSide[spawnPicker]

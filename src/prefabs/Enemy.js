@@ -24,7 +24,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
             /*let spawnPoint = [342, 435]
             let spawnLane = Phaser.Math.Between(0, 1)
             this.x = spawnPoint[spawnLane]*/
-            this.x = 342
+            this.x = 362
         }
         this.y = -150
     }
