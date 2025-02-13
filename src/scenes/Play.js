@@ -31,7 +31,8 @@ class Play extends Phaser.Scene {
         this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
         //add player character
-        this.playerCar = new Player(this, 362, 700, 'player').setScale(0.5)
+        this.playerCar = new Player(this, 362, 700, 'player').setScale(0.53)
+        this.playerCar.body.setSize(120, 230)//.setOffset(25, 25)
 
         //add tutorial text
         this.tutorialText1 = this.add.bitmapText(300, 250, 'jersey', 'Move With Arrows', 70).setOrigin(0.5, 0.5)
@@ -42,8 +43,10 @@ class Play extends Phaser.Scene {
             this.tutorialText2.destroy()
             
             //add enemy cars
-            this.enemyCar01 = new Enemy(this, 240, -150, 'enemy', 'left').setScale(0.5).setOrigin(0.5, 0)
-            this.enemyCar02 = new Enemy(this, 362, -150, 'enemy-blue', 'right').setScale(0.5).setOrigin(0.5, 0)
+            this.enemyCar01 = new Enemy(this, 240, -150, 'enemy', 'left').setScale(0.53).setOrigin(0.5, 0)
+            this.enemyCar01.body.setSize(120, 230)
+            this.enemyCar02 = new Enemy(this, 362, -150, 'enemy-blue', 'right').setScale(0.53).setOrigin(0.5, 0)
+            this.enemyCar02.body.setSize(120, 230)
 
             //add jay walker
             this.walker01 = new Walker(this, 410 , -100, 'hitchhiker', 10).setScale(1).setOrigin(0, 0.5)
