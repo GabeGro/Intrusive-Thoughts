@@ -17,7 +17,7 @@ class Menu extends Phaser.Scene {
         this.load.bitmapFont('jersey', './assets/Jersey/Jersey.png', './assets/Jersey/Jersey.xml')
         
         //load explosion animation
-        this.load.spritesheet('explosion', '/assets/explosion.png', {
+        this.load.spritesheet('explosion', './assets/explosion.png', {
             frameWidth: 128,
             frameHeight: 128,
             startFrame: 0,
