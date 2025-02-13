@@ -21,11 +21,11 @@ class Player extends Phaser.GameObjects.Sprite {
         if(this.scene.leftKey.isDown) {
             //console.log('left working')
             playerVector.x = -1
-            //this.angle = -20
+            this.angle = -20
         } else if (this.scene.rightKey.isDown) {
             //console.log('right working')
             playerVector.x = 1
-            //this.angle = 20
+            this.angle = 20
         }
         if (this.scene.upKey.isDown) {
             playerVector.y = -1
