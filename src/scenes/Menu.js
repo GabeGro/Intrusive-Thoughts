@@ -35,6 +35,18 @@ class Menu extends Phaser.Scene {
         //display menu text
         this.add.bitmapText(300, 275, 'jersey', 'Intrusive\nThoughts', 130).setOrigin(0.5, 0.5)
 
+        //explosion animation
+        this.anims.create({
+            key: 'explosion', 
+            frames: this.anims.generateFrameNumbers('explosion', {
+                start: 0, 
+                end: 12,
+                first: 0 
+            }), 
+            frameRate: 13,
+            repeat: 0
+        })
+
         //menu button
         let restartButton = this.add.image(300, 500, 'play-button').setScale(0.8).setInteractive().on('pointerdown', () => {
             this.scene.start('playScene')

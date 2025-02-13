@@ -15,14 +15,6 @@ class Play extends Phaser.Scene {
 
         //set world bounds
         this.physics.world.setBounds(150, 0, 290, 800)
-
-        //explosion animation
-        this.anims.create({
-            key: 'explosion', 
-            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 12 }), 
-            frameRate: 13,
-            repeat: 0
-        })
         
         this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
@@ -55,7 +47,6 @@ class Play extends Phaser.Scene {
                 //delete sprites
                 player.setVisible(false)
                 enemy.setVisible(false)
-                this.gameOver = true
                 //game over text
                 this.gameOverBG = this.add.graphics()
                 this.gameOverBG.fillStyle(0x000000, 0.5)
