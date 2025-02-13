@@ -43,8 +43,7 @@ class Menu extends Phaser.Scene {
                 end: 12,
                 first: 0 
             }), 
-            frameRate: 13,
-            repeat: 0
+            frameRate: 13
         })
 
         //menu button

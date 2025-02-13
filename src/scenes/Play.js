@@ -39,14 +39,17 @@ class Play extends Phaser.Scene {
 
             //player-enemy collision
             this.physics.add.collider(this.playerCar, this.enemyCar01, (player, enemy) => {
-                //run explosion
-                this.explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
-                this.explosion.play('explosion')
-                this.sound.play('explosion')
-                this.gameOver = true
                 //delete sprites
                 player.setVisible(false)
                 enemy.setVisible(false)
+                //run explosion
+                let explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
+                explosion.play('explosion')
+                explosion.on('animationcomplete', () => {
+                    explosion.destroy()
+                })
+                this.sound.play('explosion')
+                this.gameOver = true
                 //game over text
                 this.gameOverBG = this.add.graphics()
                 this.gameOverBG.fillStyle(0x000000, 0.5)
@@ -66,14 +69,17 @@ class Play extends Phaser.Scene {
                 }).on('pointerover', () => menuButton.setTint(0xaaaaaa)).on('pointerout', () => menuButton.clearTint())
             })
             this.physics.add.collider(this.playerCar, this.enemyCar02, (player, enemy) => {
-                //run explosion
-                this.explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
-                this.explosion.play('explosion')
-                this.sound.play('explosion')
-                this.gameOver = true
                 //delete sprites
                 player.setVisible(false)
                 enemy.setVisible(false)
+                //run explosion
+                let explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
+                explosion.play('explosion')
+                explosion.on('animationcomplete', () => {
+                    explosion.destroy()
+                })
+                this.sound.play('explosion')
+                this.gameOver = true
                 //game over text
                 this.gameOverBG = this.add.graphics()
                 this.gameOverBG.fillStyle(0x000000, 0.5)
