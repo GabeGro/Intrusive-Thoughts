@@ -4,6 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        //load sprite images
         this.load.image('highway', './assets/highway3.png')
         this.load.image('player', './assets/red-car.png')
         this.load.image('enemy', './assets/blue-car.png')
@@ -14,12 +15,19 @@ class Menu extends Phaser.Scene {
         this.load.image('menu-button', './assets/menu-button.png')
         this.load.image('play-button', './assets/play-button.png')
         this.load.bitmapFont('jersey', './assets/Jersey/Jersey.png', './assets/Jersey/Jersey.xml')
+        
+        //load explosion animation
         this.load.spritesheet('explosion', '/assets/explosion.png', {
             frameWidth: 128,
             frameHeight: 128,
             startFrame: 0,
             endFrame: 12
         })
+
+        //load sfx and musc
+        this.load.audio('explosion', './assets/explosion.wav')
+        this.load.audio('points', './assets/points.wav')
+        this.load.audio('bg-music', './assets/background-music.mp3')
     }
 
     create() {

@@ -50,6 +50,7 @@ class Play extends Phaser.Scene {
                 //run explosion
                 this.explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
                 this.explosion.play('explosion')
+                this.sound.play('explosion')
                 this.gameOver = true
                 //delete sprites
                 player.setVisible(false)
@@ -64,10 +65,12 @@ class Play extends Phaser.Scene {
 
                 //restart button
                 let restartButton = this.add.image(225, 350, 'restart-button').setScale(0.5).setInteractive().on('pointerdown', () => {
+                    this.sound.stopAll()
                     this.scene.restart()
                 }).on('pointerover', () => restartButton.setTint(0xaaaaaa)).on('pointerout', () => restartButton.clearTint())
                 //menu button
                 let menuButton = this.add.image(400, 350, 'menu-button').setScale(0.5).setInteractive().on('pointerdown', () => {
+                    this.sound.stopAll()
                     this.scene.start('menuScene')
                 }).on('pointerover', () => menuButton.setTint(0xaaaaaa)).on('pointerout', () => menuButton.clearTint())
             })
@@ -75,6 +78,7 @@ class Play extends Phaser.Scene {
                 //run explosion
                 this.explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
                 this.explosion.play('explosion')
+                this.sound.play('explosion')
                 this.gameOver = true
                 //delete sprites
                 player.setVisible(false)
@@ -88,10 +92,12 @@ class Play extends Phaser.Scene {
 
                 //restart button
                 let restartButton = this.add.image(225, 350, 'restart-button').setScale(0.5).setInteractive().on('pointerdown', () => {
+                    this.sound.stopAll()
                     this.scene.restart()
                 }).on('pointerover', () => restartButton.setTint(0xaaaaaa)).on('pointerout', () => restartButton.clearTint())
                 //menu button
                 let menuButton = this.add.image(400, 350, 'menu-button').setScale(0.5).setInteractive().on('pointerdown', () => {
+                    this.sound.stopAll()
                     this.scene.start('menuScene')
                 }).on('pointerover', () => menuButton.setTint(0xaaaaaa)).on('pointerout', () => menuButton.clearTint())
             })
@@ -99,6 +105,9 @@ class Play extends Phaser.Scene {
             this.physics.add.collider(this.playerCar, this.walker01, () => {
                 this.walker01.reset()
                 this.score += this.walker01.points
+                this.sound.play('points', {
+                    volume: 0.3
+                })
             })
         }, [], this)
 
@@ -124,6 +133,12 @@ class Play extends Phaser.Scene {
         this.scoreBG.fillRect(20, 20, 175, 50)
 
         this.scoreboard = this.add.bitmapText(30, 25, 'jersey', 'Score: ' + this.score, 40)
+
+        //play bg music
+        this.sound.play('bg-music', {
+            loop: true,
+            volume: 0.3
+        })
     }
 
     update() {
