@@ -35,4 +35,9 @@ class Player extends Phaser.GameObjects.Sprite {
         playerVector.normalize()
         this.body.setVelocity(200 * playerVector.x, 200 * playerVector.y)
     }
+
+    reset() {
+        this.body.x = 362
+        this.body.y = 700
+    }
 }

@@ -41,14 +41,16 @@ class Play extends Phaser.Scene {
             this.physics.add.collider(this.playerCar, this.enemyCar01, (player, enemy) => {
                 //delete sprites
                 player.setVisible(false)
+                player.reset()
                 enemy.setVisible(false)
+                enemy.reset()
                 //run explosion
                 let explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
                 explosion.play('explosion')
+                this.sound.play('explosion')
                 explosion.on('animationcomplete', () => {
                     explosion.destroy()
                 })
-                this.sound.play('explosion')
                 this.gameOver = true
                 //game over text
                 this.gameOverBG = this.add.graphics()
@@ -71,14 +73,16 @@ class Play extends Phaser.Scene {
             this.physics.add.collider(this.playerCar, this.enemyCar02, (player, enemy) => {
                 //delete sprites
                 player.setVisible(false)
+                player.reset()
                 enemy.setVisible(false)
+                enemy.reset()
                 //run explosion
                 let explosion = this.add.sprite(player.x, player.y - 150, 'explosion').setScale(3)
                 explosion.play('explosion')
+                this.sound.play('explosion')
                 explosion.on('animationcomplete', () => {
                     explosion.destroy()
                 })
-                this.sound.play('explosion')
                 this.gameOver = true
                 //game over text
                 this.gameOverBG = this.add.graphics()
