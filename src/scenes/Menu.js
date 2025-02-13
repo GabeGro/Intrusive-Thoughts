@@ -17,7 +17,7 @@ class Menu extends Phaser.Scene {
         this.load.bitmapFont('jersey', './assets/Jersey/Jersey.png', './assets/Jersey/Jersey.xml')
         
         //load explosion animation
-        this.load.spritesheet('explosion', './Intrusive-Thoughts/assets/explosion.png', {
+        this.load.spritesheet('explosion', './assets/explosion.png', {
             frameWidth: 128,
             frameHeight: 128,
             startFrame: 0,
@@ -26,8 +26,10 @@ class Menu extends Phaser.Scene {
 
         //load sfx and musc
         this.load.audio('explosion', './assets/explosion.wav')
+        this.load.audio('select', './assets/select.wav')
         this.load.audio('points', './assets/points.wav')
         this.load.audio('bg-music', './assets/background-music.mp3')
+        this.load.audio('engine', './assets/engine.mp3')
     }
 
     create() {
@@ -49,8 +51,15 @@ class Menu extends Phaser.Scene {
 
         //menu button
         let restartButton = this.add.image(300, 500, 'play-button').setScale(0.8).setInteractive().on('pointerdown', () => {
+            this.sound.play('select')
             this.scene.start('playScene')
         }).on('pointerover', () => restartButton.setTint(0xaaaaaa)).on('pointerout', () => restartButton.clearTint())
+
+        //add credits
+        console.log('Car, hitchhiker, and highway assets created by Gabriel Groenwold via Piskel')
+        console.log('Explosion, select, and point SFX by Gabriel Groenwold via Jfxr')
+        console.log("Explosion animation by Ansimuz's free explosion assets")
+        console.log('Arcade Music and Engine SFX from Pixabay')
 
         //add inputs
         //this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)

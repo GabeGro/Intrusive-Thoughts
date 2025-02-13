@@ -15,6 +15,18 @@ class Play extends Phaser.Scene {
 
         //set world bounds
         this.physics.world.setBounds(150, 0, 290, 800)
+
+        //play bg music & engine audio
+        this.bgMusic = this.sound.add('bg-music', {
+            loop: true,
+            volume: 0.3
+        })
+        this.engineAudio = this.sound.add('engine', {
+            loop: true,
+            volume: 0.3
+        })
+        this.bgMusic.play()
+        this.engineAudio.play()
         
         this.highway = this.add.tileSprite(0, 0, 600, 800, 'highway').setOrigin(0, 0)
 
@@ -39,6 +51,8 @@ class Play extends Phaser.Scene {
 
             //player-enemy collision
             this.physics.add.collider(this.playerCar, this.enemyCar01, (player, enemy) => {
+                this.engineAudio.stop()
+                
                 //delete sprites
                 player.setVisible(false)
                 player.reset()
@@ -61,16 +75,20 @@ class Play extends Phaser.Scene {
 
                 //restart button
                 let restartButton = this.add.image(225, 350, 'restart-button').setScale(0.5).setInteractive().on('pointerdown', () => {
-                    this.sound.stopAll()
-                    this.scene.restart()
+                    this.bgMusic.stop()
+                    this.sound.play('select')
+                    this.scene.restart()                 
                 }).on('pointerover', () => restartButton.setTint(0xaaaaaa)).on('pointerout', () => restartButton.clearTint())
                 //menu button
                 let menuButton = this.add.image(400, 350, 'menu-button').setScale(0.5).setInteractive().on('pointerdown', () => {
-                    this.sound.stopAll()
+                    this.bgMusic.stop()
+                    this.sound.play('select')
                     this.scene.start('menuScene')
                 }).on('pointerover', () => menuButton.setTint(0xaaaaaa)).on('pointerout', () => menuButton.clearTint())
             })
             this.physics.add.collider(this.playerCar, this.enemyCar02, (player, enemy) => {
+                this.engineAudio.stop()
+                
                 //delete sprites
                 player.setVisible(false)
                 player.reset()
@@ -93,12 +111,14 @@ class Play extends Phaser.Scene {
 
                 //restart button
                 let restartButton = this.add.image(225, 350, 'restart-button').setScale(0.5).setInteractive().on('pointerdown', () => {
-                    this.sound.stopAll()
+                    this.bgMusic.stop()
+                    this.sound.play('select')
                     this.scene.restart()
                 }).on('pointerover', () => restartButton.setTint(0xaaaaaa)).on('pointerout', () => restartButton.clearTint())
                 //menu button
                 let menuButton = this.add.image(400, 350, 'menu-button').setScale(0.5).setInteractive().on('pointerdown', () => {
-                    this.sound.stopAll()
+                    this.bgMusic.stop()
+                    this.sound.play('select')
                     this.scene.start('menuScene')
                 }).on('pointerover', () => menuButton.setTint(0xaaaaaa)).on('pointerout', () => menuButton.clearTint())
             })
@@ -134,12 +154,6 @@ class Play extends Phaser.Scene {
         this.scoreBG.fillRect(20, 20, 175, 50)
 
         this.scoreboard = this.add.bitmapText(30, 25, 'jersey', 'Score: ' + this.score, 40)
-
-        //play bg music
-        this.sound.play('bg-music', {
-            loop: true,
-            volume: 0.3
-        })
     }
 
     update() {
