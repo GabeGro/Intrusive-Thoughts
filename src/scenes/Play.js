@@ -133,6 +133,22 @@ class Play extends Phaser.Scene {
                     volume: 0.3
                 })
             })
+            //scoreboard
+            this.score = 0
+
+            this.scoreBG = this.add.graphics()
+            this.scoreBG.fillStyle(0x000000, 0.5)
+            this.scoreBG.fillRect(20, 20, 175, 50)
+
+            this.scoreboard = this.add.bitmapText(30, 25, 'jersey', 'Score: ' + this.score, 40)
+            //distance display
+            this.distance = 0
+
+            this.distanceBG = this.add.graphics()
+            this.distanceBG.fillStyle(0x000000, 0.5)
+            this.distanceBG.fillRect(350, 20, 230, 50)
+
+            this.distanceDisplay = this.add.bitmapText(360, 25, 'jersey', 'Distance: ' + this.distance, 40)
         }, [], this)
 
         //player input
@@ -149,14 +165,6 @@ class Play extends Phaser.Scene {
             },
             loop: true
         })
-        //scoreboard
-        this.score = 0
-
-        this.scoreBG = this.add.graphics()
-        this.scoreBG.fillStyle(0x000000, 0.5)
-        this.scoreBG.fillRect(20, 20, 175, 50)
-
-        this.scoreboard = this.add.bitmapText(30, 25, 'jersey', 'Score: ' + this.score, 40)
     }
 
     update() {
@@ -171,6 +179,10 @@ class Play extends Phaser.Scene {
             this.walker01.update(this.gameSpeed)
             this.enemyCar01.update(this.gameSpeed)
             this.enemyCar02.update(this.gameSpeed)
+            //update distance tracker
+            this.distanceDisplay.setText('Distance: ' + this.distance.toFixed(0))
+            //update scoreboards
+            this.scoreboard.setText('Score: ' + this.score)
         }
         if(this.gameOver ) {
             this.walker01.body.setVelocityY(0)
@@ -181,8 +193,6 @@ class Play extends Phaser.Scene {
             this.playerCar.body.setVelocityY(0)
             this.playerCar.body.setVelocityX(0)
         }
-        //update scoreboards
-        this.scoreboard.setText('Score: ' + this.score)
         //handle enemy respawn
         if (this.gameStart) {
             if (this.enemyCar01.y > 800) {
@@ -195,10 +205,12 @@ class Play extends Phaser.Scene {
                 this.walker01.reset()
             }
         }
+        
         //console.log(`${this.playerCar.x}`)
     }
 
     highwayScroll() {
         this.highway.tilePositionY -= 2.5 * this.gameSpeed
+        this.distance += this.gameSpeed/5
     }
 }
