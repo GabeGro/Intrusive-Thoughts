@@ -35,12 +35,14 @@ class Play extends Phaser.Scene {
         this.playerCar.body.setSize(120, 200)//.setOffset(25, 25)
 
         //add tutorial text
-        this.tutorialText1 = this.add.bitmapText(300, 250, 'jersey', 'Move With Arrows', 70).setOrigin(0.5, 0.5)
-        this.tutorialText2 = this.add.bitmapText(300, 350, 'jersey', 'Hit Hitchhikers For Points', 60).setOrigin(0.5, 0.5)
+        this.tutorialText1 = this.add.bitmapText(300, 250, 'jersey', 'Use arrows to speed up, slow', 50).setOrigin(0.5, 0.5)
+        this.tutorialText3 = this.add.bitmapText(300, 300, 'jersey', 'down, and change lanes', 50).setOrigin(0.5, 0.5)
+        this.tutorialText2 = this.add.bitmapText(300, 400, 'jersey', 'Hit Hitchhikers For Points', 60).setOrigin(0.5, 0.5)
 
         this.time.delayedCall(4000, () => {
             this.tutorialText1.destroy()
             this.tutorialText2.destroy()
+            this.tutorialText3.destroy()
             
             //add enemy cars
             this.enemyCar01 = new Enemy(this, 240, -150, 'enemy', 'left').setScale(0.53).setOrigin(0.5, 0)
